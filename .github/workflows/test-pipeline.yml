@@ -22,7 +22,7 @@ jobs:
 
       - name: 🧪 Run BDD Tests in Docker
         run: |
-          mkdir allure-results
+          mkdir -p allure-results
           docker run --rm \
             -v ${{ github.workspace }}/allure-results:/app/allure-results \
             playwright-bdd-tests
