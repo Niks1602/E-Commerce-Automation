@@ -1,0 +1,5 @@
+FIRST_NAME_INPUT = "input[data-test='firstName']"
+LAST_NAME_INPUT = "input[data-test='lastName']"
+ZIP_CODE_INPUT = "input[data-test='postalCode']"
+CONTINUE_BUTTON = "input[data-test='continue']"
+FINISH_BUTTON = "button[data-test='finish']"

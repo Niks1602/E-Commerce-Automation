@@ -1,0 +1,15 @@
+from features.locators.checkout_page_locators import *
+
+
+class CheckoutPage:
+    def __init__(self, page):
+        self.page = page
+
+    def enter_shipping_info(self, first_name, last_name, zip_code):
+        self.page.fill(FIRST_NAME_INPUT, first_name)
+        self.page.fill(LAST_NAME_INPUT, last_name)
+        self.page.fill(ZIP_CODE_INPUT, zip_code)
+        self.page.click(CONTINUE_BUTTON)
+
+    def finish_checkout(self):
+        self.page.click(FINISH_BUTTON)
