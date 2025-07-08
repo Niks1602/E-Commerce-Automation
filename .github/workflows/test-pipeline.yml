@@ -31,7 +31,7 @@ jobs:
     # 🧪 Run Playwright BDD Tests
     - name: 🧪 Run Playwright BDD Tests
       run: |
-        behave -f allure_behave.formatter:AllureFormatter
+        behave --no-capture
 
     # 📊 Generate Allure HTML Report
 #    - name: 📊 Generate Allure Report
