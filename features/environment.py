@@ -1,3 +1,4 @@
+import time
 from datetime import datetime
 from playwright.sync_api import sync_playwright
 from utils.logger import *
@@ -7,21 +8,30 @@ import os
 
 
 def before_all(context):
+    log_message('info', 'Starting Playwright')
+    context.config.show_timings = True
     context.playwright = sync_playwright().start()
     context.browser = context.playwright.chromium.launch(
-        headless=True,
+        headless=False,
         args=['--start-maximized'],
-        slow_mo=200
+        slow_mo=100  # Optional: Slow motion for debugging
     )
-    context.ctx = context.browser.new_context(
+    # Make sure allure-results directory exists
+    if not os.path.exists('allure-results'):
+        os.makedirs('allure-results')
+
+    context.my_context = context.browser.new_context(
         no_viewport=True,
         record_video_dir='allure-results/',
+        record_video_size={"width": 1280, "height": 720},  # Optional: set video resolution
         ignore_https_errors=True
     )
 
 
 def before_scenario(context, scenario):
-    context.page = context.ctx.new_page()
+    logger_setup(scenario.name)
+    log_message('info', f'Starting scenario: {scenario.name}')
+    context.page = context.my_context.new_page()
     context.page.goto('https://www.saucedemo.com/')
 
 
@@ -39,7 +49,7 @@ def after_scenario(context, scenario):
     # Attach screenshot
     with open(screenshot_path, 'rb') as f:
         allure.attach(f.read(), name='Screenshot', attachment_type=AttachmentType.PNG)
-
+    time.sleep(3)
     # Close the page to ensure video finalizes
     context.page.close()
 
@@ -66,6 +76,7 @@ def after_scenario(context, scenario):
 
 def after_all(context):
     log_message('info', 'Closing browser and context')
-    context.ctx.close()
+    # Close context to flush all videos to disk
+    context.my_context.close()
     context.browser.close()
     context.playwright.stop()

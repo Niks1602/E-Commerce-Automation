@@ -1,4 +1,4 @@
-from features.locators.cart_page_locators import *
+CHECKOUT_BUTTON = "button[data-test='checkout']"
 
 
 class CartPage:

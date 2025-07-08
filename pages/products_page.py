@@ -1,3 +1,7 @@
+CART_ICON = ".shopping_cart_badge"
+CART_LINK = ".shopping_cart_link"
+
+
 class ProductsPage:
     def __init__(self, page):
         self.page = page
