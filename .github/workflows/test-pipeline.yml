@@ -31,26 +31,25 @@ jobs:
     # 🧪 Run Playwright BDD Tests
     - name: 🧪 Run Playwright BDD Tests
       run: |
-        mkdir -p allure-results
         behave -f allure_behave.formatter:AllureFormatter -o allure-results
 
     # 📊 Generate Allure HTML Report
-    - name: 📊 Generate Allure Report
-      uses: simple-elf/allure-report-action@v1
-      with:
-        results-directory: allure-results
-        report-directory: allure-report
+#    - name: 📊 Generate Allure Report
+#      uses: simple-elf/allure-report-action@v1
+#      with:
+#        results-directory: allure-results
+#        report-directory: allure-report
 
     # 📤 Upload Allure Report as Artifact
-    - name: 📤 Upload Allure Report (HTML)
-      uses: actions/upload-artifact@v4
-      with:
-        name: allure-report
-        path: allure-report
+#    - name: 📤 Upload Allure Report (HTML)
+#      uses: actions/upload-artifact@v4
+#      with:
+#        name: allure-report
+#        path: allure-report
 
     # 📤 Upload Raw Allure Results (Optional)
-    - name: 📤 Upload Raw Allure Results
-      uses: actions/upload-artifact@v4
-      with:
-        name: allure-results
-        path: allure-results
+#    - name: 📤 Upload Raw Allure Results
+#      uses: actions/upload-artifact@v4
+#      with:
+#        name: allure-results
+#        path: allure-results
