@@ -12,7 +12,7 @@ def before_all(context):
     context.config.show_timings = True
     context.playwright = sync_playwright().start()
     context.browser = context.playwright.chromium.launch(
-        headless=False,
+        headless=True,
         args=['--start-maximized'],
         slow_mo=100  # Optional: Slow motion for debugging
     )
