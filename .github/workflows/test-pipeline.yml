@@ -11,24 +11,47 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout repo
-        uses: actions/checkout@v3
+    # 📥 Checkout the repository
+    - name: 📥 Checkout repo
+      uses: actions/checkout@v3
 
-      - name: 🐳 Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+    # 🐳 Set up Docker Buildx for building container images
+    - name: 🐳 Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
 
-      - name: 🛠️ Build Docker image
-        run: docker build -t playwright-bdd-tests .
+    # 🛠️ Build Docker image for Playwright BDD tests
+    - name: 🛠️ Build Docker image
+      run: docker build -t playwright-bdd-tests .
 
-      - name: 🧪 Run BDD Tests in Docker
-        run: |
-          mkdir -p allure-results
-          docker run --rm \
-            -v ${{ github.workspace }}/allure-results:/app/allure-results \
-            playwright-bdd-tests
+    # 🧹 Clean up allure-results folder on host to avoid stale files
+    - name: 🧹 Clean allure-results folder
+      run: |
+        rm -rf allure-results
+        mkdir -p allure-results
 
-      - name: 📤 Upload Allure Results (artifact)
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-results
-          path: allure-results
+    # 🧪 Run BDD Tests in Docker
+    - name: 🧪 Run BDD Tests in Docker
+      run: |
+        docker run --rm \
+          -v ${{ github.workspace }}/allure-results:/app/allure-results \
+          playwright-bdd-tests
+
+    # 📤 Upload Allure results as a CI/CD artifact
+    - name: 📤 Upload Allure Results (artifact)
+      uses: actions/upload-artifact@v4
+      with:
+        name: allure-results
+        path: allure-results
+
+    # 📊 (Optional) Generate and Upload Allure HTML Report
+    - name: 📊 Generate Allure Report
+      uses: simple-elf/allure-report-action@v1
+      with:
+        results-directory: allure-results
+        report-directory: allure-report
+
+    - name: 📤 Upload Allure Report (HTML)
+      uses: actions/upload-artifact@v4
+      with:
+        name: allure-report
+        path: allure-report
