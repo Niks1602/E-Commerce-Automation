@@ -1,0 +1,6 @@
+2025-07-08 10:13:41,925 - INFO - Logger setup is done
+2025-07-08 10:13:41,925 - INFO - Starting scenario: User adds product to cart and completes checkout
+2025-07-08 10:14:13,035 - INFO - Closing the page for scenario User adds product to cart and completes checkout
+2025-07-08 10:14:13,075 - INFO - Screenshot saved.
+2025-07-08 10:14:16,085 - ERROR - User adds product to cart and completes checkout failed
+2025-07-08 10:14:16,096 - INFO - Attached video: allure-results\66bde354241a8205e8df51d9dc73e1cc.webm
