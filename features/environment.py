@@ -29,7 +29,7 @@ def before_all(context):
 
 
 def before_scenario(context, scenario):
-    logger_setup(scenario.name)
+    # logger_setup(scenario.name)
     log_message('info', f'Starting scenario: {scenario.name}')
     context.page = context.my_context.new_page()
     context.page.goto('https://www.saucedemo.com/')
