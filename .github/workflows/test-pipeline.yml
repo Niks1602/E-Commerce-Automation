@@ -31,7 +31,7 @@ jobs:
     # 🧪 Run Playwright BDD Tests
     - name: 🧪 Run Playwright BDD Tests
       run: |
-        rm -rf allure-results  # Clean previous results
+#        rm -rf allure-results  # Clean previous results
         mkdir -p allure-results
         behave -f allure_behave.formatter:AllureFormatter -o allure-results
 
